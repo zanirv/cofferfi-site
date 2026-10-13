@@ -133,10 +133,9 @@
   .band { background: var(--band); color: var(--band-ink); border-top: 0; }
   .band .sub { color: var(--band-muted); }
   .band .eyebrow { color: var(--band-accent); }
-  .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 0; padding: 0; list-style: none; }
-  .roadmap li { border: 1px solid var(--band-line); border-radius: 10px; padding: 18px 18px 16px; }
-  .roadmap b { display: block; font-weight: 600; margin-bottom: 4px; }
-  .roadmap span { display: block; color: var(--band-muted); font-size: 15px; }
+  .roadmap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .roadmap ul { margin: 0; padding: 0; list-style: none; }
+  .roadmap li { padding: 13px 0; border-top: 1px solid var(--band-line); font-weight: 600; }
   .tag { display: inline-block; font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; margin-bottom: 12px; }
   .tag.now { background: var(--band-accent); color: #10201a; }
   .tag.next { border: 1px solid var(--band-line); color: var(--band-muted); }
@@ -297,17 +296,27 @@
       <p class="eyebrow">Roadmap</p>
       <h2>The whole bank, one entity at a time</h2>
       <p class="sub">Every product ships with the same dual control and audit trail.</p>
-      <ul class="roadmap">
-        <li><i class="tag now">Building now</i><b>Accounts and balances</b><span>Every entity's accounts in one view, with roles per entity.</span></li>
-        <li><i class="tag now">Building now</i><b>ACH, wires and book transfers</b><span>Outbound payments under maker-checker approval.</span></li>
-        <li><i class="tag now">Building now</i><b>Payees and ledger sync</b><span>Verified payees, categorization, and sync to Sage Intacct and QuickBooks.</span></li>
-        <li><i class="tag now">Building now</i><b>Accounts for new entities</b><span>Open accounts for a new LLC without a fresh bank application.</span></li>
-        <li><i class="tag next">Planned</i><b>Cards</b><span>Debit and credit cards per entity, with limits per card.</span></li>
-        <li><i class="tag next">Planned</i><b>International wires and FX</b><span>Pay suppliers abroad from any entity.</span></li>
-        <li><i class="tag next">Planned</i><b>Real-time payments</b><span>Instant settlement over FedNow and RTP.</span></li>
-        <li><i class="tag next">Planned</i><b>Checks</b><span>Issue and deposit checks from any entity.</span></li>
-        <li><i class="tag next">Planned</i><b>Credit</b><span>Lending products for operators, through partner banks.</span></li>
-      </ul>
+      <div class="roadmap">
+        <div>
+          <i class="tag now">Building now</i>
+          <ul>
+            <li>Accounts and balances</li>
+            <li>ACH, wires and book transfers</li>
+            <li>Payees and ledger sync</li>
+            <li>Accounts for new entities</li>
+          </ul>
+        </div>
+        <div>
+          <i class="tag next">Planned</i>
+          <ul>
+            <li>Cards</li>
+            <li>International wires and FX</li>
+            <li>Real-time payments</li>
+            <li>Checks</li>
+            <li>Credit</li>
+          </ul>
+        </div>
+      </div>
       <p class="note">Every product launches as the partner-bank and regulatory approvals for it are in place.</p>
     </div>
   </section>
