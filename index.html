@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coffer: treasury for multi-entity operators</title>
+<meta name="description" content="Coffer is banking and treasury for multi-entity operators: consolidated cash, dual-control payments and a tamper-evident audit trail today; cards, FX and the full banking stack to come. Coffer is a financial technology company, not a bank.">
+<meta property="og:title" content="Coffer: treasury for multi-entity operators">
+<meta property="og:description" content="Consolidated cash, dual-control payments and a tamper-evident audit trail across every entity you run. Cards, FX and more to come.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cofferfi.com/">
+<link rel="canonical" href="https://cofferfi.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23123a2e'/%3E%3Cpath d='M21.5 11.2a7 7 0 1 0 0 9.6' fill='none' stroke='%23e9dfc6' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  :root {
+    color-scheme: dark;
+    --paper: #0e1512;
+    --surface: #151e1a;
+    --ink: #ece8dc;
+    --muted: #9aa69f;
+    --line: #27332d;
+    --brand: #d9cfae;
+    --brand-ink: #10201a;
+    --accent: #d2b25e;
+    --ok: #6cc79a;
+    --wait: #d2b25e;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px rgba(0, 0, 0, .35);
+    --band: #123a2e;
+    --band-ink: #f3efe2;
+    --band-muted: #b9c6bf;
+    --band-line: rgba(243, 239, 226, .16);
+    --band-accent: #d9bd69;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 17px/1.6 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  header.nav { padding: 22px 0; }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .mark { display: inline-flex; align-items: center; gap: 10px; font: 600 22px/1 var(--serif); text-decoration: none; letter-spacing: .01em; }
+  .mark svg { width: 28px; height: 28px; }
+  .nav nav { display: flex; gap: 26px; font-size: 15px; }
+  .nav nav a { text-decoration: none; color: var(--muted); }
+  .nav nav a:hover { color: var(--ink); }
+
+  .hero { padding: 56px 0 88px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+  .eyebrow { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0 0 18px; }
+  h1 { font: 500 clamp(36px, 5.2vw, 58px)/1.08 var(--serif); letter-spacing: -.015em; margin: 0 0 22px; text-wrap: balance; }
+  .lede { font-size: 19px; color: var(--muted); margin: 0 0 30px; max-width: 34em; }
+  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+  .btn { display: inline-block; background: var(--brand); color: var(--brand-ink); text-decoration: none; padding: 13px 22px; border-radius: 8px; font-weight: 600; font-size: 16px; }
+  .btn:hover { filter: brightness(1.1); }
+  .cta small { color: var(--muted); font-size: 14px; }
+
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .panel-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  .panel-body { padding: 20px 18px 6px; }
+  .amount { font: 500 34px/1.1 var(--serif); margin: 0 0 4px; font-variant-numeric: tabular-nums; }
+  .route { font-size: 14px; color: var(--muted); margin: 0 0 18px; }
+  .steps { list-style: none; margin: 0; padding: 0; }
+  .steps li { display: grid; grid-template-columns: 20px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 14.5px; }
+  .steps b { display: block; font-weight: 600; }
+  .steps span { color: var(--muted); }
+  .steps code { font: 13px var(--mono); background: var(--paper); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; color: var(--ink); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 7px; background: var(--ok); }
+  .dot.wait { background: transparent; border: 2px solid var(--wait); }
+  .panel-foot { padding: 10px 18px 14px; font-size: 12px; color: var(--muted); }
+
+  section { padding: 76px 0; border-top: 1px solid var(--line); }
+  h2 { font: 500 clamp(27px, 3.4vw, 36px)/1.15 var(--serif); letter-spacing: -.01em; margin: 0 0 12px; text-wrap: balance; }
+  .sub { color: var(--muted); margin: 0 0 40px; max-width: 40em; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
+  .card h3 { font: 600 18px/1.3 var(--sans); margin: 0 0 8px; }
+  .card p { margin: 0; color: var(--muted); font-size: 16px; }
+
+  .controls { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 48px; margin: 0; padding: 0; list-style: none; }
+  .controls li { padding: 18px 0; border-top: 1px solid var(--line); }
+  .controls b { display: block; margin-bottom: 4px; }
+  .controls span { color: var(--muted); font-size: 16px; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .plain { margin: 0; padding: 0; list-style: none; }
+  .plain li { padding: 10px 0 10px 26px; position: relative; color: var(--muted); font-size: 16px; }
+  .plain li::before { content: ""; position: absolute; left: 2px; top: 20px; width: 12px; height: 2px; background: var(--accent); }
+  .plain li strong { color: var(--ink); font-weight: 600; }
+
+  .band { background: var(--band); color: var(--band-ink); border-top: 0; }
+  .band .sub { color: var(--band-muted); }
+  .band .eyebrow { color: var(--band-accent); }
+  .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 0; padding: 0; list-style: none; }
+  .roadmap li { border: 1px solid var(--band-line); border-radius: 10px; padding: 18px 18px 16px; }
+  .roadmap b { display: block; font-weight: 600; margin-bottom: 4px; }
+  .roadmap span { display: block; color: var(--band-muted); font-size: 15px; }
+  .tag { display: inline-block; font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; margin-bottom: 12px; }
+  .tag.now { background: var(--band-accent); color: #10201a; }
+  .tag.next { border: 1px solid var(--band-line); color: var(--band-muted); }
+  .band .note { margin: 28px 0 0; font-size: 14px; color: var(--band-muted); }
+
+  .contact { text-align: center; }
+  .contact .sub { margin-left: auto; margin-right: auto; }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; }
+  footer p { margin: 0; max-width: 44em; }
+
+  @media (max-width: 860px) {
+    .hero { padding: 28px 0 64px; }
+    .hero .wrap, .grid, .controls, .split, .roadmap { grid-template-columns: 1fr; }
+    .hero .wrap { gap: 40px; }
+    .nav nav { display: none; }
+    section { padding: 56px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="mark" href="/" aria-label="Coffer home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--brand)"/><path d="M21.5 11.2a7 7 0 1 0 0 9.6" fill="none" stroke="var(--brand-ink)" stroke-width="3" stroke-linecap="round"/></svg>
+      Coffer
+    </a>
+    <nav aria-label="Sections">
+      <a href="#product">Product</a>
+      <a href="#controls">Controls</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Business banking and treasury</p>
+        <h1>Treasury for <span style="white-space: nowrap">multi-entity</span> operators.</h1>
+        <p class="lede">One view of cash across every entity. Payments under dual control. A complete audit trail. Then the full banking stack: accounts, cards, FX and more. Built for holdcos, franchise groups and SMB acquirers.</p>
+        <div class="cta">
+          <a class="btn" href="#contact">Get in touch</a>
+          <small>In private development. Not yet taking sign-ups.</small>
+        </div>
+      </div>
+
+      <div class="panel" role="img" aria-label="Illustration of a payment waiting for a second person's approval">
+        <div class="panel-head"><span>Payment · ACH credit</span><span>Pending approval</span></div>
+        <div class="panel-body">
+          <p class="amount">$48,250.00</p>
+          <p class="route">Elm Street Holdings LLC → Northside Mechanical Inc.</p>
+          <ul class="steps">
+            <li><i class="dot"></i><div><b>Payee verified by a second person</b><span>Cooling-off period passed</span></div></li>
+            <li><i class="dot"></i><div><b>Within the initiator's limits</b><span>Per payment and per day, for this entity</span></div></li>
+            <li><i class="dot"></i><div><b>Amount confirmed</b><span>Initiator typed <code>CONFIRM $48,250.00</code></span></div></li>
+            <li><i class="dot wait"></i><div><b>Waiting for an approver</b><span>A second person, with a passkey</span></div></li>
+          </ul>
+        </div>
+        <div class="panel-foot">Illustration with sample data.</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="product">
+    <div class="wrap">
+      <h2>Every entity, one view</h2>
+      <p class="sub">Thirty LLCs usually means thirty bank logins, a balance spreadsheet and approvals by text. Coffer replaces that with one platform shaped like your entity structure. Treasury comes first; the rest of the bank follows.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Consolidated cash</h3>
+          <p>Every entity's accounts in one place. Roles are granted per entity, so an accountant sees only the entities they serve.</p>
+        </div>
+        <div class="card">
+          <h3>Dual-control payments</h3>
+          <p>Book transfers, ACH credits and domestic wires. Every payment needs an initiator and a separate approver before it reaches the bank.</p>
+        </div>
+        <div class="card">
+          <h3>Verified payees</h3>
+          <p>One person enters a payee, another verifies it, and a cooling-off period passes before it can be paid. New bank details mean a new payee.</p>
+        </div>
+        <div class="card">
+          <h3>Categorization and GL sync</h3>
+          <p>Rules first, human review for the rest, then sync to the ledger. Transfers between your own entities book as intercompany.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="controls">
+    <div class="wrap">
+      <h2>Controls that hold</h2>
+      <p class="sub">Most payment fraud is a controls failure: a changed bank detail, a rushed approval, one person with too much access. Coffer enforces these rules in the application and again in the database.</p>
+      <ul class="controls">
+        <li><b>Dual control on every payment</b><span>A second person, behind a passkey, in the web app only.</span></li>
+        <li><b>Exact-amount confirmation</b><span>The initiator confirms the amount to the cent. Unconfirmed drafts expire in minutes.</span></li>
+        <li><b>Immutable after confirmation</b><span>Amount, parties, rail, date and memo are locked. To change one, cancel and start over.</span></li>
+        <li><b>Limits per person, per entity</b><span>No limits on record, no initiating. Checked at confirmation and again at approval.</span></li>
+        <li><b>A hard per-transfer ceiling</b><span>A platform maximum, independent of bank limits. Customers can lower it, never raise it.</span></li>
+        <li><b>Tamper-evident audit trail</b><span>Append-only, hash-chained per customer, anchored daily outside the database.</span></li>
+        <li><b>No blind retries</b><span>An ambiguous bank response stops the payment until it is resolved. Nothing is resent on a guess.</span></li>
+        <li><b>Automation proposes, people decide</b><span>Automation can draft a payment. Only people confirm, approve or add a payee.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="roadmap" class="band">
+    <div class="wrap">
+      <p class="eyebrow">Roadmap</p>
+      <h2>The whole bank, one entity at a time</h2>
+      <p class="sub">Mercury and Slash built modern banking for a single company. Coffer is building it for operators who run fifty. Every product ships with the same dual control and audit trail.</p>
+      <ul class="roadmap">
+        <li><i class="tag now">Building now</i><b>Accounts and balances</b><span>Every entity's accounts in one view, with roles per entity.</span></li>
+        <li><i class="tag now">Building now</i><b>ACH, wires and book transfers</b><span>Outbound payments under maker-checker approval.</span></li>
+        <li><i class="tag now">Building now</i><b>Payees and ledger sync</b><span>Verified payees, categorization, and sync to Sage Intacct and QuickBooks.</span></li>
+        <li><i class="tag now">Building now</i><b>Accounts for new entities</b><span>Open an account for a new LLC in minutes, not weeks.</span></li>
+        <li><i class="tag next">Planned</i><b>Cards</b><span>Debit and credit cards per entity, with limits per card.</span></li>
+        <li><i class="tag next">Planned</i><b>International wires and FX</b><span>Pay suppliers abroad from any entity.</span></li>
+        <li><i class="tag next">Planned</i><b>Real-time payments</b><span>Instant settlement over FedNow and RTP.</span></li>
+        <li><i class="tag next">Planned</i><b>Checks</b><span>Issue and deposit checks from any entity.</span></li>
+        <li><i class="tag next">Planned</i><b>Credit</b><span>Lending products for operators, through partner banks.</span></li>
+      </ul>
+      <p class="note">Every product launches as the partner-bank and regulatory approvals for it are in place.</p>
+    </div>
+  </section>
+
+  <section id="scope">
+    <div class="wrap split">
+      <div>
+        <h2>How we operate</h2>
+        <ul class="plain">
+          <li><strong>Not a bank.</strong> Coffer is a financial technology company. Accounts are held at partner banks.</li>
+          <li><strong>Your entities' money, in your entities' names.</strong> No pooled or omnibus accounts.</li>
+          <li><strong>Controls first.</strong> No product ships without dual control and a tamper-evident audit trail.</li>
+          <li><strong>Outbound only, for now.</strong> Coffer does not pull money from third parties.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Where we are</h2>
+        <ul class="plain">
+          <li><strong>Private development.</strong> Not generally available; not taking sign-ups.</li>
+          <li><strong>Our portfolio first.</strong> We run many entities ourselves. They run on Coffer under the same rules as any customer.</li>
+          <li><strong>Bank partners.</strong> We are talking with banks whose APIs fit this model. If that is you, get in touch.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Talk to us</h2>
+      <p class="sub">Multi-entity operators, and the banks and accounting firms that serve them.</p>
+      <a class="btn" href="mailto:hello@cofferfi.com">hello@cofferfi.com</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Coffer. Coffer is a financial technology company, not a bank. Banking services are provided by partner banks.</p>
+    <p><a href="mailto:hello@cofferfi.com">hello@cofferfi.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
