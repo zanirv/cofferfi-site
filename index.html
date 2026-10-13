@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Coffer: treasury for multi-entity operators</title>
-<meta name="description" content="Coffer is banking and treasury for multi-entity operators: consolidated cash, dual-control payments and a tamper-evident audit trail today; cards, FX and the full banking stack to come. Coffer is a financial technology company, not a bank.">
+<meta name="description" content="Thirty LLCs, one treasury. Coffer gives multi-entity operators one view of cash and one approval flow across every entity, with dual-control payments and a tamper-evident audit trail. Coffer is a financial technology company, not a bank.">
 <meta property="og:title" content="Coffer: treasury for multi-entity operators">
-<meta property="og:description" content="Consolidated cash, dual-control payments and a tamper-evident audit trail across every entity you run. Cards, FX and more to come.">
+<meta property="og:description" content="One view of cash and one approval flow across every entity you run, without pooling funds or giving up control at the bank.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cofferfi.com/">
 <meta property="og:image" content="https://cofferfi.com/og-image.png">
@@ -68,7 +68,9 @@
   .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
   .btn { display: inline-block; background: var(--brand); color: var(--brand-ink); text-decoration: none; padding: 13px 22px; border-radius: 8px; font-weight: 600; font-size: 16px; }
   .btn:hover { filter: brightness(1.1); }
-  .cta small { color: var(--muted); font-size: 14px; }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn.ghost:hover { filter: none; border-color: var(--muted); }
+  .cta small { color: var(--muted); font-size: 14px; flex-basis: 100%; }
 
   .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
   .panel-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--muted); }
@@ -91,6 +93,34 @@
   .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
   .card h3 { font: 600 18px/1.3 var(--sans); margin: 0 0 8px; }
   .card p { margin: 0; color: var(--muted); font-size: 16px; }
+  .grid.three { grid-template-columns: repeat(3, 1fr); }
+
+  .problem h2 { max-width: 22em; }
+  .problem .sub { font-size: 19px; margin-bottom: 0; }
+
+  .mock { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; margin: 0 0 22px; font-size: 13px; overflow: hidden; }
+  .mock-head { display: flex; justify-content: space-between; gap: 10px; padding: 9px 12px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+  .mock-total { font: 500 24px/1.1 var(--serif); margin: 0; padding: 12px 12px 10px; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .mock-rows { list-style: none; margin: 0; padding: 0 12px; }
+  .mock-rows li { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); }
+  .mock-rows div { min-width: 0; }
+  .mock-rows b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mock-rows span { color: var(--muted); font-size: 12px; }
+  .mock-rows .num { color: var(--ink); font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .chip { font-size: 11px; font-style: normal; border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px; color: var(--muted); white-space: nowrap; }
+  .chip.ok { color: var(--ok); }
+  .chip.wait { color: var(--wait); }
+  .mock-foot { padding: 8px 12px 10px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--line); }
+
+  .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 0 0 28px; padding: 0; list-style: none; counter-reset: flow; }
+  .flow li { counter-increment: flow; border-top: 2px solid var(--accent); padding: 16px 0 0; }
+  .flow li::before { content: counter(flow); display: block; font: 500 22px/1 var(--serif); color: var(--accent); margin-bottom: 10px; }
+  .flow b { display: block; margin-bottom: 4px; }
+  .flow span { color: var(--muted); font-size: 16px; }
+  .fine { margin: 0; font-size: 14px; color: var(--muted); max-width: 46em; }
+
+  .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 0 0 36px; padding: 0; list-style: none; }
+  .summary li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; font-weight: 600; }
 
   .controls { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 48px; margin: 0; padding: 0; list-style: none; }
   .controls li { padding: 18px 0; border-top: 1px solid var(--line); }
@@ -115,16 +145,23 @@
   .tag.next { border: 1px solid var(--band-line); color: var(--band-muted); }
   .band .note { margin: 28px 0 0; font-size: 14px; color: var(--band-muted); }
 
-  .contact { text-align: center; }
-  .contact .sub { margin-left: auto; margin-right: auto; }
+  .ask { margin: 36px 0 24px; max-width: 40em; color: var(--muted); }
+  .ask strong { color: var(--ink); }
+
+  .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .paths .card p { margin-bottom: 20px; }
+  .contact .fine { margin-top: 28px; }
+  .contact .fine a { color: var(--ink); }
 
   footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; }
   footer p { margin: 0; max-width: 44em; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--ink); }
 
   @media (max-width: 860px) {
     .hero { padding: 28px 0 64px; }
-    .hero .wrap, .grid, .controls, .split, .roadmap { grid-template-columns: 1fr; }
+    .hero .wrap, .grid, .grid.three, .controls, .split, .roadmap, .flow, .summary, .paths { grid-template-columns: 1fr; }
     .hero .wrap { gap: 40px; }
     .nav nav { display: none; }
     section { padding: 56px 0; }
@@ -143,6 +180,7 @@
       <a href="#product">Product</a>
       <a href="#controls">Controls</a>
       <a href="#roadmap">Roadmap</a>
+      <a href="#bank-partners">Bank Partners</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -153,11 +191,12 @@
     <div class="wrap">
       <div>
         <p class="eyebrow">Business banking and treasury</p>
-        <h1>Treasury for <span style="white-space: nowrap">multi-entity</span> operators.</h1>
-        <p class="lede">One view of cash across every entity. Payments under dual control. A complete audit trail. Then the full banking stack: accounts, cards, FX and more. Built for holdcos, franchise groups and SMB acquirers.</p>
+        <h1>Thirty LLCs. One treasury.</h1>
+        <p class="lede">Coffer gives holdcos, franchise groups and <span style="white-space: nowrap">multi-entity</span> operators one view of cash and one approval flow across every entity, without pooling funds or giving up control at the bank.</p>
         <div class="cta">
-          <a class="btn" href="#contact">Get in touch</a>
-          <small>In private development. Not yet taking sign-ups.</small>
+          <a class="btn" href="#contact">Request early access</a>
+          <a class="btn ghost" href="#bank-partners">For bank partners →</a>
+          <small>In private development. Early access is by invitation.</small>
         </div>
       </div>
 
@@ -178,28 +217,75 @@
     </div>
   </div>
 
+  <section id="problem" class="problem">
+    <div class="wrap">
+      <h2>Thirty LLCs usually means thirty bank logins</h2>
+      <p class="sub">And a balance spreadsheet, and approvals by text. Mercury and Slash built modern banking for one company. Coffer is built for operators who run fifty.</p>
+    </div>
+  </section>
+
   <section id="product">
     <div class="wrap">
       <h2>Every entity, one view</h2>
-      <p class="sub">Thirty LLCs usually means thirty bank logins, a balance spreadsheet and approvals by text. Coffer replaces that with one platform shaped like your entity structure. Treasury comes first; the rest of the bank follows.</p>
-      <div class="grid">
+      <p class="sub">One platform shaped like your entity structure. Treasury comes first; the rest of the bank follows.</p>
+      <div class="grid three">
         <div class="card">
-          <h3>Consolidated cash</h3>
-          <p>Every entity's accounts in one place. Roles are granted per entity, so an accountant sees only the entities they serve.</p>
+          <div class="mock" role="img" aria-label="Illustration of a consolidated balances dashboard across four entities">
+            <div class="mock-head"><span>Cash · all entities</span><span>From the bank, 2 min ago</span></div>
+            <p class="mock-total">$4,812,406.18</p>
+            <ul class="mock-rows">
+              <li><div><b>Elm Street Holdings LLC</b><span>Operating ··4417</span></div><span class="num">$1,284,910.44</span></li>
+              <li><div><b>Elm Street Unit 4 LLC</b><span>Operating ··0962</span></div><span class="num">$612,300.00</span></li>
+              <li><div><b>Northgate Franchise Co LLC</b><span>Operating ··7731</span></div><span class="num">$2,105,775.12</span></li>
+              <li><div><b>Harbor Row Properties LLC</b><span>Reserve ··2058</span></div><span class="num">$809,420.62</span></li>
+            </ul>
+            <div class="mock-foot">Illustration with sample data.</div>
+          </div>
+          <h3>One view of cash</h3>
+          <p>Every entity's balances in one place, refreshed from the bank, not a spreadsheet. Roles are granted per entity, so an accountant sees only the entities they serve.</p>
         </div>
         <div class="card">
-          <h3>Dual-control payments</h3>
-          <p>Book transfers, ACH credits and domestic wires. Every payment needs an initiator and a separate approver before it reaches the bank.</p>
+          <div class="mock" role="img" aria-label="Illustration of an approvals queue with payments waiting for a second person">
+            <div class="mock-head"><span>Approvals</span><span>2 waiting for you</span></div>
+            <ul class="mock-rows">
+              <li><div><b>$48,250.00 · ACH</b><span>Elm Street Holdings → Northside Mechanical</span></div><i class="chip wait">Approve</i></li>
+              <li><div><b>$125,000.00 · Wire</b><span>Northgate Franchise Co → Calder Supply</span></div><i class="chip wait">Approve</i></li>
+              <li><div><b>$30,000.00 · Book</b><span>Harbor Row → Elm Street Unit 4</span></div><i class="chip ok">Approved</i></li>
+              <li><div><b>$9,400.00 · ACH</b><span>Your own draft. Someone else approves.</span></div><i class="chip">Yours</i></li>
+            </ul>
+            <div class="mock-foot">Illustration with sample data.</div>
+          </div>
+          <h3>Payments with real approvals</h3>
+          <p>Book transfers, ACH and domestic wires. Every payment needs an initiator and a separate approver, and every new payee is verified by a second person before it can be paid.</p>
         </div>
         <div class="card">
-          <h3>Verified payees</h3>
-          <p>One person enters a payee, another verifies it, and a cooling-off period passes before it can be paid. New bank details mean a new payee.</p>
-        </div>
-        <div class="card">
-          <h3>Categorization and GL sync</h3>
-          <p>Rules first, human review for the rest, then sync to the ledger. Transfers between your own entities book as intercompany.</p>
+          <div class="mock" role="img" aria-label="Illustration of transactions categorized and synced to the ledger">
+            <div class="mock-head"><span>Ledger sync · Elm Street Holdings</span><span>QuickBooks</span></div>
+            <ul class="mock-rows">
+              <li><div><b>Northside Mechanical</b><span>Repairs and maintenance · rule</span></div><i class="chip ok">Synced</i></li>
+              <li><div><b>City Water Dept</b><span>Utilities · rule</span></div><i class="chip ok">Synced</i></li>
+              <li><div><b>To Elm Street Unit 4 LLC</b><span>Intercompany · due from</span></div><i class="chip ok">Synced</i></li>
+              <li><div><b>Calder Supply</b><span>No rule matched</span></div><i class="chip wait">Needs review</i></li>
+            </ul>
+            <div class="mock-foot">Illustration with sample data.</div>
+          </div>
+          <h3>Books that stay closed</h3>
+          <p>Rules-based categorization with human review, synced to Sage Intacct or QuickBooks per entity. Transfers between your own entities book as intercompany.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="onboarding">
+    <div class="wrap">
+      <h2>A new entity, without starting over</h2>
+      <p class="sub">A new LLC should not mean a new bank application from scratch. The aim is to collect your group's ownership, beneficial owners and signers once, so a new entity adds only what is new: its formation documents and EIN.</p>
+      <ol class="flow">
+        <li><b>Add the entity</b><span>In the web app, by a person. Never by chat or automation.</span></li>
+        <li><b>The bank verifies it</b><span>The partner bank runs its business verification. Identity documents go to the bank; Coffer does not keep them.</span></li>
+        <li><b>Accounts open in its name</b><span>The new entity's accounts appear in the same view, under the same controls.</span></li>
+      </ol>
+      <p class="fine">Account opening is in development and launches once partner-bank approval is in place. Timing depends on the bank's review.</p>
     </div>
   </section>
 
@@ -207,6 +293,11 @@
     <div class="wrap">
       <h2>Controls that hold</h2>
       <p class="sub">Most payment fraud is a controls failure: a changed bank detail, a rushed approval, one person with too much access. Coffer enforces these rules in the application and again in the database.</p>
+      <ul class="summary">
+        <li>Two people on every payment, with the second behind a passkey.</li>
+        <li>Payments lock once confirmed. To change one, cancel and start over.</li>
+        <li>Every action is written to a tamper-evident audit trail.</li>
+      </ul>
       <ul class="controls">
         <li><b>Dual control on every payment</b><span>A second person, behind a passkey, in the web app only.</span></li>
         <li><b>Exact-amount confirmation</b><span>The initiator confirms the amount to the cent. Unconfirmed drafts expire in minutes.</span></li>
@@ -220,16 +311,23 @@
     </div>
   </section>
 
+  <section id="proof">
+    <div class="wrap">
+      <h2>Our own entities come first</h2>
+      <p class="sub">We run many legal entities ourselves, and Coffer is being built for them first. Our portfolio is a customer like any other: same ceilings, same approvals, same audit trail. No special cases.</p>
+    </div>
+  </section>
+
   <section id="roadmap" class="band">
     <div class="wrap">
       <p class="eyebrow">Roadmap</p>
       <h2>The whole bank, one entity at a time</h2>
-      <p class="sub">Mercury and Slash built modern banking for a single company. Coffer is building it for operators who run fifty. Every product ships with the same dual control and audit trail.</p>
+      <p class="sub">Every product ships with the same dual control and audit trail.</p>
       <ul class="roadmap">
         <li><i class="tag now">Building now</i><b>Accounts and balances</b><span>Every entity's accounts in one view, with roles per entity.</span></li>
         <li><i class="tag now">Building now</i><b>ACH, wires and book transfers</b><span>Outbound payments under maker-checker approval.</span></li>
         <li><i class="tag now">Building now</i><b>Payees and ledger sync</b><span>Verified payees, categorization, and sync to Sage Intacct and QuickBooks.</span></li>
-        <li><i class="tag now">Building now</i><b>Accounts for new entities</b><span>Open an account for a new LLC in minutes, not weeks.</span></li>
+        <li><i class="tag now">Building now</i><b>Accounts for new entities</b><span>Open accounts for a new LLC without a fresh bank application.</span></li>
         <li><i class="tag next">Planned</i><b>Cards</b><span>Debit and credit cards per entity, with limits per card.</span></li>
         <li><i class="tag next">Planned</i><b>International wires and FX</b><span>Pay suppliers abroad from any entity.</span></li>
         <li><i class="tag next">Planned</i><b>Real-time payments</b><span>Instant settlement over FedNow and RTP.</span></li>
@@ -240,33 +338,42 @@
     </div>
   </section>
 
-  <section id="scope">
-    <div class="wrap split">
-      <div>
-        <h2>How we operate</h2>
-        <ul class="plain">
-          <li><strong>Not a bank.</strong> Coffer is a financial technology company. Accounts are held at partner banks.</li>
-          <li><strong>Your entities' money, in your entities' names.</strong> No pooled or omnibus accounts.</li>
-          <li><strong>Controls first.</strong> No product ships without dual control and a tamper-evident audit trail.</li>
-          <li><strong>Outbound only, for now.</strong> Coffer does not pull money from third parties.</li>
-        </ul>
-      </div>
-      <div>
-        <h2>Where we are</h2>
-        <ul class="plain">
-          <li><strong>Private development.</strong> Not generally available; not taking sign-ups.</li>
-          <li><strong>Our portfolio first.</strong> We run many entities ourselves. They run on Coffer under the same rules as any customer.</li>
-          <li><strong>Bank partners.</strong> We are talking with banks whose APIs fit this model. If that is you, get in touch.</li>
-        </ul>
-      </div>
+  <section id="bank-partners">
+    <div class="wrap">
+      <p class="eyebrow">For bank partners</p>
+      <h2>A program built around your controls</h2>
+      <p class="sub">Coffer is a financial technology company, not a bank. Customer funds sit in accounts at a partner bank, in each customer entity's own name. No pooled or omnibus accounts.</p>
+      <ul class="controls">
+        <li><b>Outbound only, for now</b><span>Coffer does not pull money from third parties.</span></li>
+        <li><b>Controls enforced twice</b><span>Dual control, exact-amount confirmation, limits per person and per entity, and a platform per-transfer ceiling customers can lower but never raise. Enforced in the application and again in the database.</span></li>
+        <li><b>Immutable payments</b><span>Amount, parties, rail, date and memo lock at confirmation.</span></li>
+        <li><b>Tamper-evident audit trail</b><span>Append-only, hash-chained per customer, anchored daily outside our database.</span></li>
+        <li><b>No blind retries</b><span>An ambiguous bank response stops the payment until it is resolved.</span></li>
+        <li><b>People decide</b><span>Automation can draft a payment; only people confirm, approve or add a payee.</span></li>
+        <li><b>Approvals first</b><span>Each product launches only once the partner-bank and regulatory approvals for it are in place.</span></li>
+      </ul>
+      <p class="ask"><strong>What we're looking for:</strong> a sponsor bank with experience in multi-entity commercial accounts and ACH and wire origination, with APIs that fit this model.</p>
+      <a class="btn" href="mailto:hello@cofferfi.com?subject=Partnerships">hello@cofferfi.com</a>
     </div>
   </section>
 
   <section id="contact" class="contact">
     <div class="wrap">
       <h2>Talk to us</h2>
-      <p class="sub">Multi-entity operators, and the banks and accounting firms that serve them.</p>
-      <a class="btn" href="mailto:hello@cofferfi.com">hello@cofferfi.com</a>
+      <p class="sub">Two ways in, depending on who you are.</p>
+      <div class="paths">
+        <div class="card">
+          <h3>Operators: request early access</h3>
+          <p>Tell us your company, how many entities you run, your current banks and your accounting system. Early access is by invitation.</p>
+          <a class="btn" href="mailto:hello@cofferfi.com?subject=Early%20access%20request&amp;body=Name%3A%0ACompany%3A%0ANumber%20of%20entities%3A%0ACurrent%20bank(s)%3A%0AAccounting%20system%20(Sage%20Intacct%2C%20QuickBooks%2C%20other)%3A%0A">Request early access</a>
+        </div>
+        <div class="card">
+          <h3>Banks and accounting firms: partnerships</h3>
+          <p>Sponsor banks, and the accounting firms that serve multi-entity operators.</p>
+          <a class="btn ghost" href="mailto:hello@cofferfi.com?subject=Partnerships">hello@cofferfi.com</a>
+        </div>
+      </div>
+      <p class="fine">Anything else: <a href="mailto:hello@cofferfi.com">hello@cofferfi.com</a></p>
     </div>
   </section>
 </main>
