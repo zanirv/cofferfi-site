@@ -320,10 +320,7 @@
       <ul class="controls">
         <li><b>Outbound only, for now</b><span>Coffer does not pull money from third parties.</span></li>
         <li><b>Controls enforced twice</b><span>Dual control, exact-amount confirmation, limits per person and per entity, and a platform per-transfer ceiling customers can lower but never raise. Enforced in the application and again in the database.</span></li>
-        <li><b>Immutable payments</b><span>Amount, parties, rail, date and memo lock at confirmation.</span></li>
         <li><b>Tamper-evident audit trail</b><span>Append-only, hash-chained per customer, anchored daily outside our database.</span></li>
-        <li><b>No blind retries</b><span>An ambiguous bank response stops the payment until it is resolved.</span></li>
-        <li><b>People decide</b><span>Automation can draft a payment; only people confirm, approve or add a payee.</span></li>
         <li><b>Approvals first</b><span>Each product launches only once the partner-bank and regulatory approvals for it are in place.</span></li>
       </ul>
       <p class="ask"><strong>What we're looking for:</strong> a sponsor bank with experience in multi-entity commercial accounts and ACH and wire origination, with APIs that fit this model.</p>
